@@ -8,6 +8,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 1. **生成**：给定需求（庄周产品稿、禅道 story、Walle 接口、17work 资料包）→ 输出 Markdown 测试点 + Markdown 测试用例 + XMind 用例文件
 2. **补充优化**：给定现有 XMind + 新设计文档 → 保留主框架，只追加缺失测试点
 
+## 新成员 Setup（**第一次 clone 必须执行**）
+
+工作流依赖两个**全局 agent**（`~/.claude/agents/`），必须先安装到本机才能用：
+
+```bash
+# 1. 安装全局 agent（幂等，可重复执行）
+# Windows (PowerShell)
+powershell -ExecutionPolicy Bypass -File scripts/install.ps1
+# macOS / Linux (bash)
+./scripts/install.sh
+
+# 2. 首次使用需要登录内部 CLI（任选一个触发 OAuth 登录）
+npx -y --registry=http://npm.dc.servyou-it.com @servyou-ai/17work-cli@latest login
+
+# 3. 启动 Claude Code，说"生成测试用例"或"补充 XMind"即可触发 agent
+```
+
+> agent 升级时只需重新跑 `install.ps1` / `install.sh`，源在 `agents/` 目录。
+
 ## Skill 路由表（看到对应 URL/关键词即调用全局 skill）
 
 | 输入 | 全局 skill | 命令 |

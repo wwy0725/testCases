@@ -2,6 +2,27 @@
 
 从庄周产品稿、禅道需求、Walle 接口、17work 资料包等生成测试点和测试用例，输出 Markdown + XMind 双格式。
 
+## 新成员 Setup
+
+**第一次使用**必须先安装全局 agent 到本机：
+
+```bash
+# 克隆仓库
+git clone <repo-url> testcase
+cd testcase
+
+# 安装全局 agent（幂等可重复）
+# Windows (PowerShell)
+powershell -ExecutionPolicy Bypass -File scripts/install.ps1
+# macOS / Linux
+./scripts/install.sh
+
+# 触发内部 CLI 的 OAuth 登录（任选一个）
+npx -y --registry=http://npm.dc.servyou-it.com @servyou-ai/17work-cli@latest login
+```
+
+完成后启动 Claude Code，说"生成测试用例"或"补充 XMind"即可触发对应 agent。
+
 ## 快速使用
 
 直接告诉 Claude 你想做什么，例如：
@@ -9,8 +30,9 @@
 > "基于禅道 story 247369 + 这个庄周地址生成测试用例"
 > "解析这个庄周产品稿 URL，出测试点"
 > "看这几个 Walle 接口，帮我做测试点"
+> "根据这几份文档补这份 XMind"
 
-Claude 会按 `.trae/agents/testcase-generator.md` 工作流自动完成。
+Claude 会按 `agents/testcase-generator.md` / `agents/testcase-supplementer.md` 工作流自动完成。
 
 ## 工作流
 
